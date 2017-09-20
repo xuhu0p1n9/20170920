@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>好声音</title>
+	<style>
+	ul{list-style:none;font-size:0;}
+	ul>li{
+		display:inline-block;/*border:1px solid red;*/
+
+	}
+	ul>li>img{height: 410px;width: 120px;}
+	/*ul>li:first-child{width:556px;}*/
+		/*div{
+			height: 410px;width: 100%;
+			border:1px solid red;
+		}*/
+	</style>
+	<script src='jquery.min.js'></script>
+	<script>
+		function toggleSrc(obj){
+			var reg=/\/(\d)\.jpg$/i;
+			if(/large/.test(obj.src))
+				obj.src=obj.src.replace('large','');
+			else
+				obj.src=obj.src.replace(reg,'/large$1.jpg');
+		}
+		$(function(){
+			$('img').on('mouseover',function(e){
+				$(this).parent().siblings().find('[src*="large"]')
+				.stop(true,false).animate({width:'120px'},300,function(){
+					toggleSrc(this);
+				});
+				if(!$(this).is('[src*="large"]'))
+					toggleSrc(this);
+				$(this).stop(true,false).animate({width:'556px'},300);});
+				// if(e.relatedTarget.tagName!='IMG'&&$(this).is('[src*="large"]')) return;
+				// $('img[src*="large"]').stop(true,false).animate({width:"120px"},600,function(){
+				// 	toggleSrc(this);
+				// });
+				// toggleSrc(this);
+				// $(this).stop(true,false).animate({width:"556px"},600);
+			
+		});
+	</script>
+</head>
+<body>
+	<div>
+		<ul>
+			<li><img src="images/large1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/3.jpg" alt=""></li>
+			<li><img src="images/4.jpg" alt=""></li>
+			<li><img src="images/5.jpg" alt=""></li>
+		</ul>
+	</div>
+</body>
+</html>
